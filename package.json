@@ -1,0 +1,22 @@
+{
+  "name": "react-native-screen-keyboard",
+  "version": "1.0.0",
+  "description": "[![npm](https://img.shields.io/npm/v/react-native-pins.svg?style=flat-square)](https://www.npmjs.com/package/react-native-pins) [![npm licence](http://img.shields.io/npm/l/react-native-pins.svg?style=flat-square)](https://npmjs.org/package/react-native-pins) [![npm downloads](http://img.shields.io/npm/dt/react-native-pins.svg?style=flat-square)](https://npmjs.org/package/react-native-pins)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukebrandonfarrell/react-native-screen-keyboard.git"
+  },
+  "author": "Luke Brandon Farrell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lukebrandonfarrell/react-native-screen-keyboard/issues"
+  },
+  "homepage": "https://github.com/lukebrandonfarrell/react-native-screen-keyboard#readme",
+  "dependencies": {
+    "react-native-material-ripple": "git+https://github.com/lukebrandonfarrell/react-native-material-ripple.git"
+  }
+}
