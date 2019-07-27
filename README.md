@@ -35,7 +35,7 @@ keyDown(key){
 
 The back and custom key will pass a sting, either `"back"` or `"custom"` to the keyDown callback.
 
-The `<PinKeyboard />` also has a number of functions which can be triggered through refs.
+The `<VirtualKeyboard />` also has a number of functions which can be triggered through refs.
  
  - `displayMessage(message)` this will create a popup above the
 keyboard displaying the given a message. The style of the popup can be customized through props.
@@ -43,26 +43,28 @@ keyboard displaying the given a message. The style of the popup can be customize
  - `enable()` this will enable the keyboard for input.
  - `disable()` this will disable the keyboard.
 
-#### PinKeyboard
+#### VirtualKeyboard
 
-The `<PinKeyboard />` uses two arrays to allow you to set keys and define custom functions for each key.
+The `<VirtualKeyboard />` uses two arrays to allow you to set keys and define custom functions for each key.
 
 | Prop            | Type          | Optional  | Default              | Description                                                                             |
 | --------------- | ------------- | --------- | -------------------- | --------------------------------------------------------------------------------------- |
 | onRef           | any           | No        |                      | onRef allows you to call the `throwError(message)` method.                              |
-| keyDown         | function      | No        |                      | Callback function triggered when a key is pressed. Returns the key value.               |
-| keyboard        | array         | Yes       | See PinKeyboard.js   | 4 x 3 matrix containing the value for each key. See PinKeyboard.js.                     |
-| keyboardFunc    | array         | Yes       | See PinKeyboard.js   | 4 x 3 matrix containing custom functions for each key. Pass null for no function.       |
+| onKeyDown         | function      | Yes        |                      | Callback function triggered when a key is pressed. Returns the key value.               |
+| onChange         | function      | Yes        |                      | Callback function triggered when a key is pressed. Returns the full string.               |
+| onCustomKey         | function      | Yes        |                      | Callback function triggered when custom left button is pressed, use with `onChange`               |
+| keyboard        | array         | Yes       | See VirtualKeyboard.js   | 4 x 3 matrix containing the value for each key. See VirtualKeyboard.js.                     |
+| keyboardFunc    | array         | Yes       | See VirtualKeyboard.js   | 4 x 3 matrix containing custom functions for each key. Pass null for no function.       |
 | keyboardCustomKeyImage | number | Yes       | null                 | Image for the custom key (bottom left key)                                              |
 | keyboardMessageDisplayTime | number | Yes   | 3000                 | Time in milliseconds for the message dialog to automatically clear.                     |
 | vibration       | bool          | Yes       | false                | Key / Tactile vibration enabled                                                         |
-| keyboardStyle   | object        | Yes       | See PinKeyboard.js   | Style applied to the keyboard.                                                          |
-| keyboardDisabledStyle | object  | Yes       | See PinKeyboard.js   | Style applied when the keyboard is disabled.                                            |
-| keyStyle        | object        | Yes       | See PinKeyboard.js   | Style applied to each key on the keyboard.                                              |
-| keyTextStyle    | object        | Yes       | See PinKeyboard.js   | Style applied to the text inside each key.                                              |
-| keyImageStyle   | object        | Yes       | See PinKeyboard.js   | Style applied to image in a key. If an image is passed.                                 |
-| messageStyle    | object        | Yes       | See PinKeyboard.js   | Style applied to popup error. Can set the background colour here.                     |
-| messageTextStyle| object        | Yes       | See PinKeyboard.js   | Style applied to the text inside the popup error.       
+| keyboardStyle   | object        | Yes       | See VirtualKeyboard.js   | Style applied to the keyboard.                                                          |
+| keyboardDisabledStyle | object  | Yes       | See VirtualKeyboard.js   | Style applied when the keyboard is disabled.                                            |
+| keyStyle        | object        | Yes       | See VirtualKeyboard.js   | Style applied to each key on the keyboard.                                              |
+| keyTextStyle    | object        | Yes       | See VirtualKeyboard.js   | Style applied to the text inside each key.                                              |
+| keyImageStyle   | object        | Yes       | See VirtualKeyboard.js   | Style applied to image in a key. If an image is passed.                                 |
+| messageStyle    | object        | Yes       | See VirtualKeyboard.js   | Style applied to popup error. Can set the background colour here.                     |
+| messageTextStyle| object        | Yes       | See VirtualKeyboard.js   | Style applied to the text inside the popup error.       
 
 ## Contributing
 
