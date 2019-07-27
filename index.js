@@ -1,3 +1,3 @@
-import PinKeyboard from "./PinKeyboard";
+import VirtualKeyboard from "./VirtualKeyboard";
 
-export { PinKeyboard };
+export { VirtualKeyboard };

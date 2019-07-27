@@ -17,12 +17,12 @@ To get started install via npm:
 
 Import:
 ```js
- import { PinKeyboard } from 'react-native-screen-keyboard';
+ import { VirtualKeyboard } from 'react-native-screen-keyboard';
 ```
 
 Then add it to your code:
 ```js
-<PinKeyboard
+<VirtualKeyboard
     onRef={ref => (this.keyboard = ref)}
     keyDown={this.keyDown.bind(this)}
 />

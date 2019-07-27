@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 
 const backAsset = require("./back.png");
 
-class PinKeyboard extends Component {
+class VirtualKeyboard extends Component {
   /**
    * [ Built-in React method. ]
    *
@@ -23,6 +23,7 @@ class PinKeyboard extends Component {
     super(props);
 
     this.state = {
+      text: "",
       disabled: false,
       message: null
     };
@@ -49,6 +50,17 @@ class PinKeyboard extends Component {
   /**
    * [ Built-in React method. ]
    *
+   * Executed when the components props are updated.
+   */
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.text !== this.state.text) {
+      if (this.props.onChange) this.props.onChange(this.state.text);
+    }
+  }
+
+  /**
+   * [ Built-in React method. ]
+   *
    * Allows us to render JSX to the screen
    */
   render() {
@@ -69,22 +81,22 @@ class PinKeyboard extends Component {
 
     return (
         <View style={containerStyle}>
-        {this.renderMessage()}
-  <View style={[keyboardDefaultStyle, keyboardStyle]}>
-    {// Maps each array of numbers in the keyboardValues array
-      defaultKeyboard.map((row, r) => {
-        return (
-            <View key={r} style={keyboardRowStyle}>
-            {// Maps each number in row and creates key for that number
-              row.map((element, k) => {
-              return this.renderKey(element, r, k);
-            })}
-      </View>
-      );
-      })}
-  </View>
-    </View>
-  );
+          {this.renderMessage()}
+          <View style={[keyboardDefaultStyle, keyboardStyle]}>
+            {// Maps each array of numbers in the keyboardValues array
+              defaultKeyboard.map((row, r) => {
+                return (
+                    <View key={r} style={keyboardRowStyle}>
+                      {// Maps each number in row and creates key for that number
+                        row.map((element, k) => {
+                          return this.renderKey(element, r, k);
+                        })}
+                    </View>
+                );
+              })}
+          </View>
+        </View>
+    );
   }
 
   /**
@@ -109,9 +121,9 @@ class PinKeyboard extends Component {
     if (message) {
       return (
           <View style={[messageDefaultStyle, messageStyle]}>
-    <Text style={[messageTextDefaultStyle, messageTextStyle]}>{message}</Text>
-      </View>
-    );
+            <Text style={[messageTextDefaultStyle, messageTextStyle]}>{message}</Text>
+          </View>
+      );
     }
 
     return null;
@@ -137,10 +149,11 @@ class PinKeyboard extends Component {
     } = styles;
     /** Props */
     const {
-      keyDown,
       keyboardFunc,
       keyboardDisabledStyle,
       vibration,
+      onKeyDown,
+      onChange,
       // Style Props
       keyStyle,
       keyTextStyle,
@@ -148,6 +161,14 @@ class PinKeyboard extends Component {
     } = this.props;
     /** State */
     const { disabled } = this.state;
+    /** Variables */
+    const keyDown = (value) => {
+      this.setState({
+        text: this.resolveKeyDownVirtualKeyboard(this.state.text, value),
+      });
+
+      if(onKeyDown) onKeyDown(value);
+    }
 
     // Custom functions for the keyboard key
     const keyboardFuncSet = keyboardFunc
@@ -156,47 +177,68 @@ class PinKeyboard extends Component {
           [null, null, null],
           [null, null, null],
           [null, null, null],
-          [() => this.props.keyDown("custom"), null, () => this.props.keyDown("back")]
+          [() => keyDown("custom"), null, () => keyDown("back")]
         ];
 
     // Decide if the element passed as the key is text
     const keyJsx = keyboardFuncSet[row][column] ? (
         <Image style={[keyImageDefaultStyle, keyImageStyle]} source={entity} />
-  ) : (
-    <Text style={[keyTextDefaultStyle, keyTextStyle]}>{entity}</Text>
-  );
+    ) : (
+        <Text style={[keyTextDefaultStyle, keyTextStyle]}>{entity}</Text>
+    );
 
     // We want to block keyboard interactions if it has been disabled.
     if (!disabled) {
       return (
           <Ripple
-      rippleColor={"#000"}
-      key={column}
-      onPressIn={() => {
-        if(vibration) Vibration.vibrate(50);
+              rippleColor={"#000"}
+              key={column}
+              onPressIn={() => {
+                if(vibration) Vibration.vibrate(50);
 
-        keyboardFuncSet[row][column] ? keyboardFuncSet[row][column]() : keyDown(entity)
-      }}
-      style={[keyContainerStyle, keyDefaultStyle, keyStyle]}
-    >
-      {keyJsx}
-    </Ripple>
-    );
+                keyboardFuncSet[row][column] ? keyboardFuncSet[row][column]() : keyDown(entity)
+              }}
+              style={[keyContainerStyle, keyDefaultStyle, keyStyle]}
+          >
+            {keyJsx}
+          </Ripple>
+      );
     } else {
       return (
           <View
-      key={column}
-      style={[
-            keyContainerStyle,
-        keyDefaultStyle,
-        keyStyle,
-        keyboardDisabledDefaultStyle,
-        keyboardDisabledStyle
-    ]}
-    >
-      {keyJsx}
-    </View>
-    );
+              key={column}
+              style={[
+                keyContainerStyle,
+                keyDefaultStyle,
+                keyStyle,
+                keyboardDisabledDefaultStyle,
+                keyboardDisabledStyle
+              ]}
+          >
+            {keyJsx}
+          </View>
+      );
+    }
+  }
+  /**
+   * Resolves a key press on virtual keyboard
+   *
+   * @param string
+   * @param char
+   */
+  resolveKeyDownVirtualKeyboard(string = "", char) {
+    const newString = string;
+
+    switch (char) {
+      case "back": {
+        return newString.substring(0, newString.length - 1);
+      }
+      case "custom":
+        if (this.props.onCustomKey) this.props.onCustomKey(string);
+        return string;
+      default: {
+        return newString.concat(char);
+      }
     }
   }
 
@@ -243,9 +285,11 @@ class PinKeyboard extends Component {
   }
 }
 
-PinKeyboard.propTypes = {
+VirtualKeyboard.propTypes = {
   onRef: PropTypes.any.isRequired,
-  keyDown: PropTypes.func.isRequired,
+  onKeyDown: PropTypes.func,
+  onChange: PropTypes.func,
+  onCustomKey: PropTypes.func,
   keyboard: PropTypes.array,
   keyboardFunc: PropTypes.array,
   keyboardCustomKeyImage: PropTypes.number,
@@ -261,7 +305,7 @@ PinKeyboard.propTypes = {
   messageTextStyle: PropTypes.object
 };
 
-PinKeyboard.defaultProps = {
+VirtualKeyboard.defaultProps = {
   // Keyboard functions. By default the text (number) in the
   // keyboard array will be passed via the keyDown callback.
   // Use this array to set custom functions for certain keys.
@@ -339,4 +383,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default PinKeyboard;
+export default VirtualKeyboard;
