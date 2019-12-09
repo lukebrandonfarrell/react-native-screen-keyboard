@@ -180,12 +180,15 @@ class VirtualKeyboard extends Component {
           [() => keyDown("custom"), null, () => keyDown("back")]
         ];
 
-    // Decide if the element passed as the key is text
-    const keyJsx = keyboardFuncSet[row][column] ? (
-        <Image style={[keyImageDefaultStyle, keyImageStyle]} source={entity} />
-    ) : (
-        <Text style={[keyTextDefaultStyle, keyTextStyle]}>{entity}</Text>
-    );
+    // Decide what type of element is passed as the key
+    let keyJsx;
+    if (React.isValidElement(entity)) {
+      keyJsx = entity;
+    } else if (keyboardFuncSet[row][column]) {
+      keyJsx = <Image style={[keyImageDefaultStyle, keyImageStyle]} source={entity} />;
+    } else {
+      keyJsx = <Text style={[keyTextDefaultStyle, keyTextStyle]}>{entity}</Text>;
+    }
 
     // We want to block keyboard interactions if it has been disabled.
     if (!disabled) {
