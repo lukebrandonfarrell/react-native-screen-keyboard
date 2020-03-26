@@ -288,6 +288,9 @@ class VirtualKeyboard extends Component {
   }
 }
 
+
+const stylePropType = PropTypes.oneOfType([PropTypes.number, PropTypes.object, PropTypes.array, PropTypes.bool]);
+
 VirtualKeyboard.propTypes = {
   onRef: PropTypes.any.isRequired,
   onKeyDown: PropTypes.func,
@@ -299,13 +302,13 @@ VirtualKeyboard.propTypes = {
   keyboardMessageDisplayTime: PropTypes.number,
   vibration: PropTypes.bool,
   // Style props
-  keyboardStyle: PropTypes.object,
-  keyboardDisabledStyle: PropTypes.object,
-  keyStyle: PropTypes.object,
-  keyTextStyle: PropTypes.object,
-  keyImageStyle: PropTypes.object,
-  messageStyle: PropTypes.object,
-  messageTextStyle: PropTypes.object
+  keyboardStyle: stylePropType,
+  keyboardDisabledStyle: stylePropType,
+  keyStyle: stylePropType,
+  keyTextStyle: stylePropType,
+  keyImageStyle: stylePropType,
+  messageStyle: stylePropType,
+  messageTextStyle: stylePropType
 };
 
 VirtualKeyboard.defaultProps = {
