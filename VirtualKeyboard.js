@@ -35,7 +35,9 @@ class VirtualKeyboard extends Component {
    * Executed when the component is mounted to the screen.
    */
   componentDidMount() {
-    this.props.onRef(this);
+    if(this.props.onRef) {
+      this.props.onRef(this);
+    }
   }
 
   /**
@@ -44,7 +46,9 @@ class VirtualKeyboard extends Component {
    * Executed when the component is unmounted from the screen
    */
   componentWillUnmount() {
-    this.props.onRef(undefined);
+    if(this.props.onRef) {
+      this.props.onRef(undefined);
+    }
   }
 
   /**
@@ -292,7 +296,7 @@ class VirtualKeyboard extends Component {
 const stylePropType = PropTypes.oneOfType([PropTypes.number, PropTypes.object, PropTypes.array, PropTypes.bool]);
 
 VirtualKeyboard.propTypes = {
-  onRef: PropTypes.any.isRequired,
+  onRef: PropTypes.any,
   onKeyDown: PropTypes.func,
   onChange: PropTypes.func,
   onCustomKey: PropTypes.func,
