@@ -70,10 +70,6 @@ The `<VirtualKeyboard />` uses two arrays to allow you to set keys and define cu
 
 If you want to issue a PR, go ahead ;)
 
-## Authors
-
-* [**Luke Brandon Farrell**](https://lukebrandonfarrell.com/) - *Author*
-
 ## License
 
 This project is licensed under the MIT License
