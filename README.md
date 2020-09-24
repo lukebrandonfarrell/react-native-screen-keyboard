@@ -1,4 +1,7 @@
 # react-native-screen-keyboard
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![npm](https://img.shields.io/npm/v/react-native-screen-keyboard.svg?style=flat-square)](https://www.npmjs.com/package/react-native-screen-keyboard)
 [![npm licence](http://img.shields.io/npm/l/react-native-screen-keyboard.svg?style=flat-square)](https://npmjs.org/package/react-native-screen-keyboard)
@@ -70,10 +73,25 @@ The `<VirtualKeyboard />` uses two arrays to allow you to set keys and define cu
 
 If you want to issue a PR, go ahead ;)
 
-## Authors
-
-* [**Luke Brandon Farrell**](https://lukebrandonfarrell.com/) - *Author*
-
 ## License
 
 This project is licensed under the MIT License
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="http://www.lukebrandonfarrell.com"><img src="https://avatars3.githubusercontent.com/u/18139277?v=4" width="100px;" alt=""/><br /><sub><b>Luke Brandon Farrell</b></sub></a><br /><a href="https://github.com/aspect-apps/react-native-screen-keyboard/commits?author=lukebrandonfarrell" title="Code">💻</a> <a href="https://github.com/aspect-apps/react-native-screen-keyboard/commits?author=lukebrandonfarrell" title="Documentation">📖</a> <a href="#infra-lukebrandonfarrell" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
