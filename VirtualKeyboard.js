@@ -4,7 +4,7 @@
  */
 
 import React, { Component } from "react";
-import { View, Image, Text, StyleSheet, Platform, Vibration } from "react-native";
+import { View, Image, Text, StyleSheet, Platform, Vibration, ViewPropTypes } from "react-native";
 import Ripple from "react-native-material-ripple";
 import PropTypes from "prop-types";
 
@@ -158,6 +158,7 @@ class VirtualKeyboard extends Component {
       vibration,
       onKeyDown,
       onChange,
+      onPressFunction,
       // Style Props
       keyStyle,
       keyTextStyle,
@@ -196,15 +197,18 @@ class VirtualKeyboard extends Component {
 
     // We want to block keyboard interactions if it has been disabled.
     if (!disabled) {
+      const onPress = () => {
+        if(vibration) Vibration.vibrate(50);
+
+        keyboardFuncSet[row][column] ? keyboardFuncSet[row][column]() : keyDown(entity)
+      };
       return (
           <Ripple
               rippleColor={"#000"}
               key={column}
-              onPressIn={() => {
-                if(vibration) Vibration.vibrate(50);
-
-                keyboardFuncSet[row][column] ? keyboardFuncSet[row][column]() : keyDown(entity)
-              }}
+              onPress={onPressFunction === 'onPress' ? onPress : undefined}
+              onPressIn={!onPressFunction || onPressFunction === 'onPressIn' ? onPress : undefined}
+              onPressOut={onPressFunction === 'onPressOut' ? onPress : undefined}
               style={[keyContainerStyle, keyDefaultStyle, keyStyle]}
           >
             {keyJsx}
@@ -292,27 +296,25 @@ class VirtualKeyboard extends Component {
   }
 }
 
-
-const stylePropType = PropTypes.oneOfType([PropTypes.number, PropTypes.object, PropTypes.array, PropTypes.bool]);
-
 VirtualKeyboard.propTypes = {
   onRef: PropTypes.any,
   onKeyDown: PropTypes.func,
   onChange: PropTypes.func,
   onCustomKey: PropTypes.func,
+  onPressFunction: PropTypes.oneOf(['onPress', 'onPressIn', 'onPressOut']),
   keyboard: PropTypes.array,
   keyboardFunc: PropTypes.array,
   keyboardCustomKeyImage: PropTypes.number,
   keyboardMessageDisplayTime: PropTypes.number,
   vibration: PropTypes.bool,
   // Style props
-  keyboardStyle: stylePropType,
-  keyboardDisabledStyle: stylePropType,
-  keyStyle: stylePropType,
-  keyTextStyle: stylePropType,
-  keyImageStyle: stylePropType,
-  messageStyle: stylePropType,
-  messageTextStyle: stylePropType
+  keyboardStyle: ViewPropTypes.style,
+  keyboardDisabledStyle: ViewPropTypes.style,
+  keyStyle: ViewPropTypes.style,
+  keyTextStyle: ViewPropTypes.style,
+  keyImageStyle: ViewPropTypes.style,
+  messageStyle: ViewPropTypes.style,
+  messageTextStyle: ViewPropTypes.style
 };
 
 VirtualKeyboard.defaultProps = {
@@ -321,6 +323,7 @@ VirtualKeyboard.defaultProps = {
   // Use this array to set custom functions for certain keys.
   keyboardFunc: null,
   keyboardMessageDisplayTime: 3000,
+  onPressFunction: 'onPressIn',
   vibration: false,
 };
 

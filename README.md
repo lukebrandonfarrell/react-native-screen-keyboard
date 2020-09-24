@@ -52,10 +52,11 @@ The `<VirtualKeyboard />` uses two arrays to allow you to set keys and define cu
 
 | Prop            | Type          | Optional  | Default              | Description                                                                             |
 | --------------- | ------------- | --------- | -------------------- | --------------------------------------------------------------------------------------- |
-| onRef           | any           | No        |                      | onRef allows you to call the `throwError(message)` method.                              |
+| onRef           | any           | Yes        |                      | onRef allows you to call the `throwError(message)` method.                              |
 | onKeyDown         | function      | Yes        |                      | Callback function triggered when a key is pressed. Returns the key value.               |
 | onChange         | function      | Yes        |                      | Callback function triggered when a key is pressed. Returns the full string.               |
 | onCustomKey         | function      | Yes        |                      | Callback function triggered when custom left button is pressed, use with `onChange`               |
+| onPressFunction | string        | Yes       | onPressIn            | Determines which function to call when the user pressed a key. Could be one of the following three functions: `onPress`, `onPressIn` or `onPressOut`. For an explanation how the functions work take a look at the GitHub page from the [react-native-material-ripple](https://github.com/n4kz/react-native-material-ripple#properties) project.
 | keyboard        | array         | Yes       | See VirtualKeyboard.js   | 4 x 3 matrix containing the value for each key. See VirtualKeyboard.js.                     |
 | keyboardFunc    | array         | Yes       | See VirtualKeyboard.js   | 4 x 3 matrix containing custom functions for each key. Pass null for no function.       |
 | keyboardCustomKeyImage | number | Yes       | null                 | Image for the custom key (bottom left key)                                              |
