@@ -194,6 +194,7 @@ class VirtualKeyboard extends Component {
     if (!disabled) {
       return (
           <Ripple
+              testID={`VirtualKeyboard-${entity}`}
               rippleColor={"#000"}
               key={column}
               onPressIn={() => {
