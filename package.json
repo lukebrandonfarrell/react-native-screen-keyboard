@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/lukebrandonfarrell/react-native-screen-keyboard#readme",
   "dependencies": {
-    "react-native-material-ripple": "git+https://github.com/lukebrandonfarrell/react-native-material-ripple.git"
+    "react-native-material-ripple": "git+https://github.com/aspect-apps/react-native-material-ripple.git"
   },
   "keywords": [
     "on-screen",
