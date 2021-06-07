@@ -15,6 +15,17 @@
         "doc",
         "infra"
       ]
+    },
+    {
+      "login": "aikewoody",
+      "name": "Aike van den Brink",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17004429?v=4",
+      "profile": "https://github.com/aikewoody",
+      "contributions": [
+        "data",
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
