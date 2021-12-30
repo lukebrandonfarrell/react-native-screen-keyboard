@@ -116,7 +116,10 @@ class VirtualKeyboard extends Component {
     const {
       // Style Props
       messageStyle,
-      messageTextStyle
+      messageTextStyle,
+      // TestID Props
+      messageTestID,
+      messageTextTestID,
     } = this.props;
 
     // State
@@ -124,8 +127,8 @@ class VirtualKeyboard extends Component {
 
     if (message) {
       return (
-          <View style={[messageDefaultStyle, messageStyle]}>
-            <Text style={[messageTextDefaultStyle, messageTextStyle]}>{message}</Text>
+          <View testID={`VirtualKeyboard-${messageTestID}`} style={[messageDefaultStyle, messageStyle]}>
+            <Text testID={`VirtualKeyboard-${messageTextTestID}`} style={[messageTextDefaultStyle, messageTextStyle]}>{message}</Text>
           </View>
       );
     }
@@ -218,6 +221,7 @@ class VirtualKeyboard extends Component {
     } else {
       return (
           <View
+              testID={`VirtualKeyboard-${entity}-disabled`}
               key={column}
               style={[
                 keyContainerStyle,
@@ -315,7 +319,10 @@ VirtualKeyboard.propTypes = {
   keyTextStyle: ViewPropTypes.style,
   keyImageStyle: ViewPropTypes.style,
   messageStyle: ViewPropTypes.style,
-  messageTextStyle: ViewPropTypes.style
+  messageTextStyle: ViewPropTypes.style,
+  // TestID props
+  messageTestID: PropTypes.string,
+  messageTextTestID: PropTypes.string,
 };
 
 VirtualKeyboard.defaultProps = {
@@ -326,6 +333,8 @@ VirtualKeyboard.defaultProps = {
   keyboardMessageDisplayTime: 3000,
   onPressFunction: 'onPressIn',
   vibration: false,
+  messageTestID: 'MessageContainer',
+  messageTextTestID: 'Message',
 };
 
 const styles = StyleSheet.create({
