@@ -124,8 +124,8 @@ class VirtualKeyboard extends Component {
 
     if (message) {
       return (
-          <View style={[messageDefaultStyle, messageStyle]}>
-            <Text style={[messageTextDefaultStyle, messageTextStyle]}>{message}</Text>
+          <View testID="VirtualKeyboard-MessageContainer" style={[messageDefaultStyle, messageStyle]}>
+            <Text testID="VirtualKeyboard-Message" style={[messageTextDefaultStyle, messageTextStyle]}>{message}</Text>
           </View>
       );
     }
