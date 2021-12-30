@@ -68,7 +68,9 @@ The `<VirtualKeyboard />` uses two arrays to allow you to set keys and define cu
 | keyTextStyle    | object        | Yes       | See VirtualKeyboard.js   | Style applied to the text inside each key.                                              |
 | keyImageStyle   | object        | Yes       | See VirtualKeyboard.js   | Style applied to image in a key. If an image is passed.                                 |
 | messageStyle    | object        | Yes       | See VirtualKeyboard.js   | Style applied to popup error. Can set the background colour here.                     |
-| messageTextStyle| object        | Yes       | See VirtualKeyboard.js   | Style applied to the text inside the popup error.       
+| messageTextStyle| object        | Yes       | See VirtualKeyboard.js   | Style applied to the text inside the popup error.
+| messageTestID| string        | Yes       | "MessageContainer"   | TestID belonging to the view component of the popup error.
+| messageTextTestID| string        | Yes       | "Message"   | TestID belonging to the text component inside the popup error.       
 
 ## Contributing
 
