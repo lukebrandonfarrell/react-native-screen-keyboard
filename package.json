@@ -7,8 +7,6 @@
     "test": "echo \"Error: no test specified\"",
     "prepublishOnly": "pinst --disable",
     "postpublish": "pinst --enable",
-    "pre-commit": "lint-staged",
-    "postinstall": "husky install"
   },
   "repository": {
     "type": "git",
