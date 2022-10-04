@@ -58,12 +58,13 @@ The `<VirtualKeyboard />` uses two arrays to allow you to set keys and define cu
 | onCustomKey         | function      | Yes        |                      | Callback function triggered when custom left button is pressed, use with `onChange`               |
 | onPressFunction | string        | Yes       | onPressIn            | Determines which function to call when the user pressed a key. Could be one of the following three functions: `onPress`, `onPressIn` or `onPressOut`. For an explanation how the functions work take a look at the GitHub page from the [react-native-material-ripple](https://github.com/n4kz/react-native-material-ripple#properties) project.
 | keyboard        | array         | Yes       | See VirtualKeyboard.js   | 4 x 3 matrix containing the value for each key. See VirtualKeyboard.js.                     |
-| keyboardFunc    | array         | Yes       | See VirtualKeyboard.js   | 4 x 3 matrix containing custom functions for each key. Pass null for no function.       |
+| keyboardFunc    | array         | Yes       | See VirtualKeyboard.js   | 4 x 3 matrix containing custom functions for each key. Pass null for no function. You can pass the string  'back' in place of a function to have the default back function execute on the key.       |
 | keyboardCustomKeyImage | number | Yes       | null                 | Image for the custom key (bottom left key)                                              |
 | keyboardMessageDisplayTime | number | Yes   | 3000                 | Time in milliseconds for the message dialog to automatically clear.                     |
 | vibration       | bool          | Yes       | false                | Key / Tactile vibration enabled                                                         |
 | keyboardStyle   | object        | Yes       | See VirtualKeyboard.js   | Style applied to the keyboard.                                                          |
 | keyboardDisabledStyle | object  | Yes       | See VirtualKeyboard.js   | Style applied when the keyboard is disabled.                                            |
+| keyCustomStyle  | array         | Yes       | See VirtualKeyboard.js   | 4 x 3 matrix containing a custom style for each key. Pass null for default style or to use keyStyle as an override.       |
 | keyStyle        | object        | Yes       | See VirtualKeyboard.js   | Style applied to each key on the keyboard.                                              |
 | keyTextStyle    | object        | Yes       | See VirtualKeyboard.js   | Style applied to the text inside each key.                                              |
 | keyImageStyle   | object        | Yes       | See VirtualKeyboard.js   | Style applied to image in a key. If an image is passed.                                 |
