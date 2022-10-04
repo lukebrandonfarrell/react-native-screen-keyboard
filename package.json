@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\"",
     "prepublishOnly": "pinst --disable",
-    "postpublish": "pinst --enable",
+    "postpublish": "pinst --enable"
   },
   "repository": {
     "type": "git",
