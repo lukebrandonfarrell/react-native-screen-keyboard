@@ -4,7 +4,7 @@
  */
 
 import React, { Component } from "react";
-import { View, Image, Text, StyleSheet, Platform, Vibration, ViewPropTypes } from "react-native";
+import { View, Image, Text, StyleSheet, Platform, TextPropTypes, Vibration, ViewPropTypes } from "react-native";
 import Ripple from "react-native-material-ripple";
 import PropTypes from "prop-types";
 
@@ -156,6 +156,7 @@ class VirtualKeyboard extends Component {
     } = styles;
     /** Props */
     const {
+      keyDisabled,
       keyboardFunc,
       keyboardDisabledStyle,
       vibration,
@@ -164,8 +165,9 @@ class VirtualKeyboard extends Component {
       onPressFunction,
       // Style Props
       keyStyle,
+      keyCustomStyle,
       keyTextStyle,
-      keyImageStyle
+      keyImageStyle,
     } = this.props;
     /** State */
     const { disabled } = this.state;
@@ -187,6 +189,12 @@ class VirtualKeyboard extends Component {
           [null, null, null],
           [() => keyDown("custom"), null, () => keyDown("back")]
         ];
+
+    const _keyStyle = keyCustomStyle && keyCustomStyle[row][column]
+      ? keyCustomStyle[row][column]
+      : keyStyle;
+
+    const _keyDisabled = keyDisabled && keyDisabled[row][column];
 
     // Decide what type of element is passed as the key
     let keyJsx;
@@ -213,8 +221,9 @@ class VirtualKeyboard extends Component {
               onPress={onPressFunction === 'onPress' ? onPress : undefined}
               onPressIn={!onPressFunction || onPressFunction === 'onPressIn' ? onPress : undefined}
               onPressOut={onPressFunction === 'onPressOut' ? onPress : undefined}
-              style={[keyContainerStyle, keyDefaultStyle, keyStyle]}
-          >
+              style={[keyContainerStyle, keyDefaultStyle, _keyStyle]}
+              disabled={entity === null || _keyDisabled}
+              >
             {keyJsx}
           </Ripple>
       );
@@ -226,7 +235,7 @@ class VirtualKeyboard extends Component {
               style={[
                 keyContainerStyle,
                 keyDefaultStyle,
-                keyStyle,
+                _keyStyle,
                 keyboardDisabledDefaultStyle,
                 keyboardDisabledStyle
               ]}
@@ -256,6 +265,22 @@ class VirtualKeyboard extends Component {
         return newString.concat(char);
       }
     }
+  }
+
+  /**
+  * Function used to set the keyboard text
+  */
+  setText(text) {
+    this.setState({ text });
+  }
+
+  /**
+   * Function used to execute back/delete
+   */
+  back() {
+    this.setState({
+      text: this.resolveKeyDownVirtualKeyboard(this.state.text, 'back'),
+    });
   }
 
   /**
@@ -311,12 +336,14 @@ VirtualKeyboard.propTypes = {
   keyboardFunc: PropTypes.array,
   keyboardCustomKeyImage: PropTypes.number,
   keyboardMessageDisplayTime: PropTypes.number,
+  keyDisabled: PropTypes.array,
   vibration: PropTypes.bool,
   // Style props
   keyboardStyle: ViewPropTypes.style,
   keyboardDisabledStyle: ViewPropTypes.style,
   keyStyle: ViewPropTypes.style,
-  keyTextStyle: ViewPropTypes.style,
+  keyCustomStyle: ViewPropTypes.style,
+  keyTextStyle: TextPropTypes.style,
   keyImageStyle: ViewPropTypes.style,
   messageStyle: ViewPropTypes.style,
   messageTextStyle: ViewPropTypes.style,
