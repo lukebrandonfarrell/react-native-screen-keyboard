@@ -36,6 +36,16 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "leonardoballand",
+      "name": "Leonardo BALLAND",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5455556?v=4",
+      "profile": "https://www.leonardoballand.com",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
