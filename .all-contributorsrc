@@ -26,12 +26,23 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "ajp8164",
+      "name": "Andy Phillipson",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1063765?v=4",
+      "profile": "https://github.com/ajp8164",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
   "projectName": "react-native-screen-keyboard",
-  "projectOwner": "aspect-apps",
+  "projectOwner": "lukebrandonfarrell",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitConvention": "angular"
 }

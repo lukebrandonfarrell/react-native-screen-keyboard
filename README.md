@@ -1,6 +1,6 @@
 # react-native-screen-keyboard
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![npm](https://img.shields.io/npm/v/react-native-screen-keyboard.svg?style=flat-square)](https://www.npmjs.com/package/react-native-screen-keyboard)
@@ -92,10 +92,13 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
-  <tr>
-    <td align="center"><a href="http://www.lukebrandonfarrell.com"><img src="https://avatars3.githubusercontent.com/u/18139277?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Luke Brandon Farrell</b></sub></a><br /><a href="https://github.com/aspect-apps/react-native-screen-keyboard/commits?author=lukebrandonfarrell" title="Code">💻</a> <a href="https://github.com/aspect-apps/react-native-screen-keyboard/commits?author=lukebrandonfarrell" title="Documentation">📖</a> <a href="#infra-lukebrandonfarrell" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
-    <td align="center"><a href="https://github.com/aikewoody"><img src="https://avatars.githubusercontent.com/u/17004429?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Aike van den Brink</b></sub></a><br /><a href="#data-aikewoody" title="Data">🔣</a> <a href="https://github.com/aspect-apps/react-native-screen-keyboard/commits?author=aikewoody" title="Code">💻</a> <a href="https://github.com/aspect-apps/react-native-screen-keyboard/commits?author=aikewoody" title="Documentation">📖</a></td>
-  </tr>
+  <tbody>
+    <tr>
+      <td align="center"><a href="http://www.lukebrandonfarrell.com"><img src="https://avatars3.githubusercontent.com/u/18139277?v=4?s=100" width="100px;" alt="Luke Brandon Farrell"/><br /><sub><b>Luke Brandon Farrell</b></sub></a><br /><a href="https://github.com/lukebrandonfarrell/react-native-screen-keyboard/commits?author=lukebrandonfarrell" title="Code">💻</a> <a href="https://github.com/lukebrandonfarrell/react-native-screen-keyboard/commits?author=lukebrandonfarrell" title="Documentation">📖</a> <a href="#infra-lukebrandonfarrell" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+      <td align="center"><a href="https://github.com/aikewoody"><img src="https://avatars.githubusercontent.com/u/17004429?v=4?s=100" width="100px;" alt="Aike van den Brink"/><br /><sub><b>Aike van den Brink</b></sub></a><br /><a href="#data-aikewoody" title="Data">🔣</a> <a href="https://github.com/lukebrandonfarrell/react-native-screen-keyboard/commits?author=aikewoody" title="Code">💻</a> <a href="https://github.com/lukebrandonfarrell/react-native-screen-keyboard/commits?author=aikewoody" title="Documentation">📖</a></td>
+      <td align="center"><a href="https://github.com/ajp8164"><img src="https://avatars.githubusercontent.com/u/1063765?v=4?s=100" width="100px;" alt="Andy Phillipson"/><br /><sub><b>Andy Phillipson</b></sub></a><br /><a href="https://github.com/lukebrandonfarrell/react-native-screen-keyboard/commits?author=ajp8164" title="Code">💻</a> <a href="https://github.com/lukebrandonfarrell/react-native-screen-keyboard/commits?author=ajp8164" title="Documentation">📖</a></td>
+    </tr>
+  </tbody>
 </table>
 
 <!-- markdownlint-restore -->
