@@ -4,9 +4,10 @@
  */
 
 import React, { Component } from "react";
-import { View, Image, Text, StyleSheet, Platform, TextPropTypes, Vibration, ViewPropTypes } from "react-native";
+import { View, Image, Text, StyleSheet, Platform, Vibration } from "react-native";
 import Ripple from "react-native-material-ripple";
 import PropTypes from "prop-types";
+import { TextInputPropTypes, ViewPropTypes } from 'deprecated-react-native-prop-types';
 
 const backAsset = require("./back.png");
 
@@ -343,7 +344,7 @@ VirtualKeyboard.propTypes = {
   keyboardDisabledStyle: ViewPropTypes.style,
   keyStyle: ViewPropTypes.style,
   keyCustomStyle: ViewPropTypes.style,
-  keyTextStyle: TextPropTypes.style,
+  keyTextStyle: TextInputPropTypes,
   keyImageStyle: ViewPropTypes.style,
   messageStyle: ViewPropTypes.style,
   messageTextStyle: ViewPropTypes.style,
