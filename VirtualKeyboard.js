@@ -4,10 +4,20 @@
  */
 
 import React, { Component } from "react";
-import { View, Image, Text, StyleSheet, Platform, Vibration } from "react-native";
+import {
+  View,
+  Image,
+  Text,
+  StyleSheet,
+  Platform,
+  Vibration,
+} from "react-native";
 import Ripple from "react-native-material-ripple";
 import PropTypes from "prop-types";
-import { TextInputPropTypes, ViewPropTypes } from 'deprecated-react-native-prop-types';
+import {
+  TextInputPropTypes,
+  ViewPropTypes,
+} from "deprecated-react-native-prop-types";
 
 const backAsset = require("./back.png");
 
@@ -26,7 +36,7 @@ class VirtualKeyboard extends Component {
     this.state = {
       text: "",
       disabled: false,
-      message: null
+      message: null,
     };
   }
 
@@ -36,7 +46,7 @@ class VirtualKeyboard extends Component {
    * Executed when the component is mounted to the screen.
    */
   componentDidMount() {
-    if(this.props.onRef) {
+    if (this.props.onRef) {
       this.props.onRef(this);
     }
   }
@@ -47,7 +57,7 @@ class VirtualKeyboard extends Component {
    * Executed when the component is unmounted from the screen
    */
   componentWillUnmount() {
-    if(this.props.onRef) {
+    if (this.props.onRef) {
       this.props.onRef(undefined);
     }
   }
@@ -58,7 +68,7 @@ class VirtualKeyboard extends Component {
    * Executed when the components props are updated.
    */
   componentDidUpdate(prevProps, prevState) {
-    if(prevState.text !== this.state.text) {
+    if (prevState.text !== this.state.text) {
       if (this.props.onChange) this.props.onChange(this.state.text);
     }
   }
@@ -75,30 +85,41 @@ class VirtualKeyboard extends Component {
     const {
       keyboard,
       keyboardCustomKeyImage,
+      keyboardCustomBackKey = backAsset,
       // Style Props
-      keyboardStyle
+      keyboardStyle,
     } = this.props;
     /** Variables */
         // Keyboard configuration. The default contains a key
         // for each number 0 - 9 and a back button.
-    const defaultKeyboard = keyboard ?
-        keyboard : [[1, 2, 3], [4, 5, 6], [7, 8, 9], [keyboardCustomKeyImage, 0, backAsset]];
+    const defaultKeyboard = keyboard
+            ? keyboard
+            : [
+              [1, 2, 3],
+              [4, 5, 6],
+              [7, 8, 9],
+              [keyboardCustomKeyImage, 0, keyboardCustomBackKey],
+            ];
 
     return (
         <View style={containerStyle}>
           {this.renderMessage()}
           <View style={[keyboardDefaultStyle, keyboardStyle]}>
-            {// Maps each array of numbers in the keyboardValues array
+            {
+              // Maps each array of numbers in the keyboardValues array
               defaultKeyboard.map((row, r) => {
                 return (
                     <View key={r} style={keyboardRowStyle}>
-                      {// Maps each number in row and creates key for that number
+                      {
+                        // Maps each number in row and creates key for that number
                         row.map((element, k) => {
                           return this.renderKey(element, r, k);
-                        })}
+                        })
+                      }
                     </View>
                 );
-              })}
+              })
+            }
           </View>
         </View>
     );
@@ -128,8 +149,16 @@ class VirtualKeyboard extends Component {
 
     if (message) {
       return (
-          <View testID={`VirtualKeyboard-${messageTestID}`} style={[messageDefaultStyle, messageStyle]}>
-            <Text testID={`VirtualKeyboard-${messageTextTestID}`} style={[messageTextDefaultStyle, messageTextStyle]}>{message}</Text>
+          <View
+              testID={`VirtualKeyboard-${messageTestID}`}
+              style={[messageDefaultStyle, messageStyle]}
+          >
+            <Text
+                testID={`VirtualKeyboard-${messageTextTestID}`}
+                style={[messageTextDefaultStyle, messageTextStyle]}
+            >
+              {message}
+            </Text>
           </View>
       );
     }
@@ -153,7 +182,7 @@ class VirtualKeyboard extends Component {
       keyboardDisabledDefaultStyle,
       keyDefaultStyle,
       keyTextDefaultStyle,
-      keyImageDefaultStyle
+      keyImageDefaultStyle,
     } = styles;
     /** Props */
     const {
@@ -178,8 +207,8 @@ class VirtualKeyboard extends Component {
         text: this.resolveKeyDownVirtualKeyboard(this.state.text, value),
       });
 
-      if(onKeyDown) onKeyDown(value);
-    }
+      if (onKeyDown) onKeyDown(value);
+    };
 
     // Custom functions for the keyboard key
     const keyboardFuncSet = keyboardFunc
@@ -188,12 +217,13 @@ class VirtualKeyboard extends Component {
           [null, null, null],
           [null, null, null],
           [null, null, null],
-          [() => keyDown("custom"), null, () => keyDown("back")]
+          [() => keyDown("custom"), null, () => keyDown("back")],
         ];
 
-    const _keyStyle = keyCustomStyle && keyCustomStyle[row][column]
-      ? keyCustomStyle[row][column]
-      : keyStyle;
+    const _keyStyle =
+        keyCustomStyle && keyCustomStyle[row][column]
+            ? keyCustomStyle[row][column]
+            : keyStyle;
 
     const _keyDisabled = keyDisabled && keyDisabled[row][column];
 
@@ -202,29 +232,39 @@ class VirtualKeyboard extends Component {
     if (React.isValidElement(entity)) {
       keyJsx = entity;
     } else if (keyboardFuncSet[row][column]) {
-      keyJsx = <Image style={[keyImageDefaultStyle, keyImageStyle]} source={entity} />;
+      keyJsx = (
+          <Image style={[keyImageDefaultStyle, keyImageStyle]} source={entity} />
+      );
     } else {
-      keyJsx = <Text style={[keyTextDefaultStyle, keyTextStyle]}>{entity}</Text>;
+      keyJsx = (
+          <Text style={[keyTextDefaultStyle, keyTextStyle]}>{entity}</Text>
+      );
     }
 
     // We want to block keyboard interactions if it has been disabled.
     if (!disabled) {
       const onPress = () => {
-        if(vibration) Vibration.vibrate(50);
+        if (vibration) Vibration.vibrate(50);
 
-        keyboardFuncSet[row][column] ? keyboardFuncSet[row][column]() : keyDown(entity)
+        keyboardFuncSet[row][column]
+            ? keyboardFuncSet[row][column]()
+            : keyDown(entity);
       };
       return (
           <Ripple
               testID={`VirtualKeyboard-${entity}`}
               rippleColor={"#000"}
               key={column}
-              onPress={onPressFunction === 'onPress' ? onPress : undefined}
-              onPressIn={!onPressFunction || onPressFunction === 'onPressIn' ? onPress : undefined}
-              onPressOut={onPressFunction === 'onPressOut' ? onPress : undefined}
+              onPress={onPressFunction === "onPress" ? onPress : undefined}
+              onPressIn={
+                !onPressFunction || onPressFunction === "onPressIn"
+                    ? onPress
+                    : undefined
+              }
+              onPressOut={onPressFunction === "onPressOut" ? onPress : undefined}
               style={[keyContainerStyle, keyDefaultStyle, _keyStyle]}
               disabled={entity === null || _keyDisabled}
-              >
+          >
             {keyJsx}
           </Ripple>
       );
@@ -238,7 +278,7 @@ class VirtualKeyboard extends Component {
                 keyDefaultStyle,
                 _keyStyle,
                 keyboardDisabledDefaultStyle,
-                keyboardDisabledStyle
+                keyboardDisabledStyle,
               ]}
           >
             {keyJsx}
@@ -269,8 +309,8 @@ class VirtualKeyboard extends Component {
   }
 
   /**
-  * Function used to set the keyboard text
-  */
+   * Function used to set the keyboard text
+   */
   setText(text) {
     this.setState({ text });
   }
@@ -280,7 +320,7 @@ class VirtualKeyboard extends Component {
    */
   back() {
     this.setState({
-      text: this.resolveKeyDownVirtualKeyboard(this.state.text, 'back'),
+      text: this.resolveKeyDownVirtualKeyboard(this.state.text, "back"),
     });
   }
 
@@ -290,15 +330,18 @@ class VirtualKeyboard extends Component {
    * @param message
    */
   displayMessage(message) {
-    this.setState({
-      message
-    }, () => {
-      if(this.hideMessageTimeout) clearTimeout(this.hideMessageTimeout);
+    this.setState(
+        {
+          message,
+        },
+        () => {
+          if (this.hideMessageTimeout) clearTimeout(this.hideMessageTimeout);
 
-      this.hideMessageTimeout = setTimeout(() => {
-        this.clearMessage();
-      }, this.props.keyboardMessageDisplayTime);
-    });
+          this.hideMessageTimeout = setTimeout(() => {
+            this.clearMessage();
+          }, this.props.keyboardMessageDisplayTime);
+        }
+    );
   }
 
   /**
@@ -313,7 +356,7 @@ class VirtualKeyboard extends Component {
    */
   disable() {
     this.setState({
-      disabled: true
+      disabled: true,
     });
   }
 
@@ -322,7 +365,7 @@ class VirtualKeyboard extends Component {
    */
   enable() {
     this.setState({
-      disabled: false
+      disabled: false,
     });
   }
 }
@@ -332,10 +375,11 @@ VirtualKeyboard.propTypes = {
   onKeyDown: PropTypes.func,
   onChange: PropTypes.func,
   onCustomKey: PropTypes.func,
-  onPressFunction: PropTypes.oneOf(['onPress', 'onPressIn', 'onPressOut']),
+  onPressFunction: PropTypes.oneOf(["onPress", "onPressIn", "onPressOut"]),
   keyboard: PropTypes.array,
   keyboardFunc: PropTypes.array,
   keyboardCustomKeyImage: PropTypes.number,
+  keyboardCustomBackKey: PropTypes.element,
   keyboardMessageDisplayTime: PropTypes.number,
   keyDisabled: PropTypes.array,
   vibration: PropTypes.bool,
@@ -344,7 +388,7 @@ VirtualKeyboard.propTypes = {
   keyboardDisabledStyle: ViewPropTypes.style,
   keyStyle: ViewPropTypes.style,
   keyCustomStyle: ViewPropTypes.style,
-  keyTextStyle: TextInputPropTypes,
+  keyTextStyle: TextInputPropTypes.style,
   keyImageStyle: ViewPropTypes.style,
   messageStyle: ViewPropTypes.style,
   messageTextStyle: ViewPropTypes.style,
@@ -359,10 +403,10 @@ VirtualKeyboard.defaultProps = {
   // Use this array to set custom functions for certain keys.
   keyboardFunc: null,
   keyboardMessageDisplayTime: 3000,
-  onPressFunction: 'onPressIn',
+  onPressFunction: "onPressIn",
   vibration: false,
-  messageTestID: 'MessageContainer',
-  messageTextTestID: 'Message',
+  messageTestID: "MessageContainer",
+  messageTextTestID: "Message",
 };
 
 const styles = StyleSheet.create({
@@ -370,27 +414,27 @@ const styles = StyleSheet.create({
     flex: null,
     width: "100%",
     flexDirection: "column",
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
   },
   // Style applied to the keyboard. Must contain a height or
   // the keyboard will not be displayed.
   keyboardDefaultStyle: {
     height: 250,
-    backgroundColor: "#FFF"
+    backgroundColor: "#FFF",
   },
   keyboardRowStyle: {
     flex: 1,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   keyContainerStyle: {
     flex: 1,
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   // Style applied to keyboard when it is disabled.
   keyboardDisabledDefaultStyle: {
-    backgroundColor: "#FFF"
+    backgroundColor: "#FFF",
   },
   // Style the individual keys
   keyDefaultStyle: {
@@ -398,40 +442,40 @@ const styles = StyleSheet.create({
     borderRightColor: "#e8e8e8",
     borderRightWidth: 1,
     borderBottomColor: "#e8e8e8",
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
   },
   // Style for the text inside a key
   keyTextDefaultStyle: {
     ...Platform.select({
       ios: {
-        fontFamily: "HelveticaNeue"
+        fontFamily: "HelveticaNeue",
       },
       android: {
-        fontFamily: "Roboto"
-      }
+        fontFamily: "Roboto",
+      },
     }),
     fontWeight: "400",
     fontSize: 25,
     textAlign: "center",
-    color: "#222222"
+    color: "#222222",
   },
   // Style for an image inside a key
   keyImageDefaultStyle: {
     width: 28,
-    height: 28
+    height: 28,
   },
   messageDefaultStyle: {
     height: 30,
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#e8e8e8"
+    backgroundColor: "#e8e8e8",
   },
   messageTextDefaultStyle: {
     color: "#222222",
     fontSize: 15,
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 });
 
 export default VirtualKeyboard;
